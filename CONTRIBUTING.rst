@@ -72,8 +72,8 @@ To run the full suite of `tox`_ tests locally you'll need docker. Once you have 
 and running do::
 
     git submodule update --init --recursive
-    docker pull uavcan/toxic:py35-py38-sq
-    docker run --rm -it -v $PWD:/repo uavcan/toxic:py35-py38-sq
+    docker pull uavcan/toxic:py35-py39-sq
+    docker run --rm -it -v $PWD:/repo uavcan/toxic:py35-py39-sq
     tox
 
 To run a limited suite using only locally available interpreters directly on your host machine,
@@ -183,7 +183,7 @@ Building The Docs
 We rely on `read the docs`_ to build our documentation from github but we also verify this build
 as part of our tox build. This means you can view a local copy after completing a full, successful
 test run (See `Running The Tests`_) or do
-:code:`docker run --rm -t -v $PWD:/repo uavcan/toxic:py35-py38-sq /bin/sh -c "tox -e docs"` to build
+:code:`docker run --rm -t -v $PWD:/repo uavcan/toxic:py35-py39-sq /bin/sh -c "tox -e docs"` to build
 the docs target. You can open the index.html under .tox/docs/tmp/index.html or run a local
 web-server::
 
@@ -240,6 +240,10 @@ select individual steps to speed things up::
 
     bk local run --filter="verification build"
 
+Make sure you are in the nunavut root directory when you run these commands. Use the :code:`--debug` flag if you run
+into problems::
+
+    bk --debug local run
 
 Administrating Buildkite on AWS
 ================================================
@@ -254,7 +258,7 @@ our Buildkite `AWS CloudFormation`_ stack and of our PyPI UAVCAN organization.
 
         aws s3 cp --acl private --sse aws:kms ~/Downloads/env "s3://buildkite-managedsecretsbucket-xxxxxxxx/nunavut-release/env"
 
-    4. Back in the PyPI keys list delete any keys that are older than the one previously in use. You can keep the key
+    4. Back in the PyPI keys list, delete any keys that are older than the one previously in use. You can keep the key
        you just rotated until you rotate the new key.
 
 
